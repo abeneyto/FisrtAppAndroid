@@ -12,17 +12,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val heloText: TextView = findViewById(R.id.helloText)
+        val countText: TextView = findViewById(R.id.helloText)
 
-        val muButton = findViewById<Button>(R.id.buton1)
+        val myButton = findViewById<Button>(R.id.buton1)
         var count : Int = 0;
 
-                muButton.setOnClickListener {
+        myButton.setOnClickListener {
             count++
-            val message = getString(R.string.button)+ count.toString()
-                    heloText.text = "Veces tocado: " + count.toString()
+            val message = getString(R.string.button)
+            countText.text = "Clicks on button: " + count.toString()
 
-                    Toast.makeText(MainActivity@this, message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(MainActivity@this, message, Toast.LENGTH_SHORT).show()
         }
     }
 }
