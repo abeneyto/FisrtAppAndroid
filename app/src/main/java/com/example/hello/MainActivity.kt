@@ -8,21 +8,27 @@ import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var countText: TextView
+    private lateinit var myButton: Button
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val countText: TextView = findViewById(R.id.helloText)
-
-        val myButton = findViewById<Button>(R.id.buton1)
-        var count : Int = 0;
+        countText = findViewById(R.id.helloText)
+        myButton = findViewById<Button>(R.id.buton1)
+        var count: Int = 0;
 
         myButton.setOnClickListener {
             count++
             val message = getString(R.string.button)
-            countText.text = "Clicks on button: " + count.toString()
-
-            Toast.makeText(MainActivity@this, message, Toast.LENGTH_SHORT).show()
+            incrementText(count)
+            Toast.makeText(MainActivity@ this, message, Toast.LENGTH_SHORT).show()
         }
+
+    }
+    fun incrementText(pressedTimes: Int){
+        countText.text = "Button pressed $pressedTimes"
     }
 }
