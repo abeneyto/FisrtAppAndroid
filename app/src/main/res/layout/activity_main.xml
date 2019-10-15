@@ -19,10 +19,17 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="My first movie"/>
+
     <Button
         android:id="@+id/buton1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My button"></Button>
+        android:text="Contador"></Button>
+
+    <Button
+        android:id="@+id/button_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ir al Profile" />
 
 </LinearLayout>
