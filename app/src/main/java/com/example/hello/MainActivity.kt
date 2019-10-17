@@ -1,5 +1,6 @@
 package com.example.hello
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -10,6 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var countText: TextView
     private lateinit var myButton: Button
+    private lateinit var myButtonProfile: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,13 +20,25 @@ class MainActivity : AppCompatActivity() {
 
         countText = findViewById(R.id.helloText)
         myButton = findViewById<Button>(R.id.buton1)
+        myButtonProfile = findViewById<Button>(R.id.button_profile)
+
         var count: Int = 0;
 
         myButton.setOnClickListener {
             count++
-            val message = getString(R.string.button)
             incrementText(count)
+            val message = "Ha ganado "
             Toast.makeText(MainActivity@ this, message, Toast.LENGTH_SHORT).show()
+        }
+        myButtonProfile.setOnClickListener {
+        val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("image", R.drawable.guti)
+            intent.putExtra("name", "Guti")
+            intent.putExtra("birthdate", "12/03/1975")
+            intent.putExtra("city", "Madrid")
+            intent.putExtra("history", "This is the history of Jose Maria Gutierrez, Guti." +
+                    "/n" + "Exjugador del Real Madrid, que ahora desarrolla su carrera como entrenador.")
+            startActivity(intent)
         }
 
     }
