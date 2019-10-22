@@ -24,12 +24,24 @@
         android:id="@+id/buton1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Contador"></Button>
+        android:text="COUNT +1"></Button>
 
     <Button
         android:id="@+id/button_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ir al Profile" />
+        android:text="PROFILE" />
+
+    <Button
+        android:id="@+id/button_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MOVIE DETAIL" />
+
+    <Button
+        android:id="@+id/button_movielist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MOVIE LIST" />
 
 </LinearLayout>
