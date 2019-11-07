@@ -40,7 +40,7 @@
         android:id="@+id/genreTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Genre:"
         app:layout_constraintStart_toStartOf="@+id/yearTitle"
         app:layout_constraintTop_toBottomOf="@+id/yearTitle" />
@@ -50,6 +50,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
         android:text="1999"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -61,6 +62,7 @@
         android:id="@+id/movieGenre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="Drama"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -73,19 +75,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="end"
-        app:constraint_referenced_ids="genreTitle,yearTitle"
+        app:constraint_referenced_ids="genreTitle,yearTitle,directorTitle,castTitle"
         tools:layout_editor_absoluteX="411dp" />
 
     <TextView
         android:id="@+id/movieDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/genreTitle"
-        app:layout_constraintTop_toBottomOf="@+id/genreTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/castTitle" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -131,5 +133,47 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/movieTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/movieTitle" />
+
+    <TextView
+        android:id="@+id/directorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Director:"
+        app:layout_constraintStart_toStartOf="@+id/genreTitle"
+        app:layout_constraintTop_toBottomOf="@+id/genreTitle" />
+
+    <TextView
+        android:id="@+id/castTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Cast:"
+        app:layout_constraintStart_toStartOf="@+id/directorTitle"
+        app:layout_constraintTop_toBottomOf="@+id/directorTitle" />
+
+    <TextView
+        android:id="@+id/movieDirector"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Director"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/directorTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/movieGenre" />
+
+    <TextView
+        android:id="@+id/movieCast"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Actors"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/castTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/movieDirector" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

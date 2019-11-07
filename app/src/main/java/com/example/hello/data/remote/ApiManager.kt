@@ -10,6 +10,12 @@ import retrofit2.http.QueryMap
 interface APIService {
     @GET("search/movie")
     suspend fun getMovies(@QueryMap map:Map<String, String>): Response<Result>
+
+    @GET("/movie/{movie_id}")
+    suspend fun getMovieDetail(@QueryMap map:Map<Int, String>): Response<Result>
+
+    @GET("search/movie")
+    suspend fun getMovieCredits(@QueryMap map:Map<Int, String>): Response<Result>
 }
 object RetrofitFactory {
     const val BASE_URL = "https://api.themoviedb.org/3/"

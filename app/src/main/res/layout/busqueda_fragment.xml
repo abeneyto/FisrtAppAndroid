@@ -10,27 +10,22 @@
         android:id="@+id/movies_reciclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchMovies" />
+        app:layout_constraintTop_toBottomOf="@+id/searchText" />
 
     <EditText
-        android:id="@+id/searchMovies"
+        android:id="@+id/searchText"
         android:layout_width="332dp"
         android:layout_height="45dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="Insert movie"
         android:inputType="textPersonName"
-        android:text="@android:string/search_go"
         android:textColor="#969494"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonSearch"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonSearch"
-        android:layout_width="54dp"
-        android:layout_height="46dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
