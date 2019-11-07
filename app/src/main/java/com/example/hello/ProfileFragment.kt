@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.perfil_fragment.*
 /**
  * A simple [Fragment] subclass.
  */
-class PerfilFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

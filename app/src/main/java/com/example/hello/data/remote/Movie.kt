@@ -10,7 +10,7 @@ data class MovieCrew(val id:Int, val cast: List<MovieCast>, val crew: List<Movie
 
 data class MovieCast(val name:String)
 
-data class MovieDirector(val name:String)
+data class MovieDirector(val name:String, val job: String)
 
 data class Result(val page:Int, val results:List<Movie>)
 

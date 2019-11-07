@@ -1,4 +1,5 @@
 package com.example.hello
+
 import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater.*
@@ -12,7 +13,8 @@ import kotlinx.android.synthetic.main.movie_item.view.*
 import java.util.*
 
 
-class MoviesAdapter(private val movieList: List<Movie>) : RecyclerView.Adapter<CuastomViewHolder>(){
+class MoviesAdapter(private val movieList: List<Movie>) :
+    RecyclerView.Adapter<CuastomViewHolder>() {
 
     override fun getItemCount() = movieList.size
 
@@ -24,7 +26,7 @@ class MoviesAdapter(private val movieList: List<Movie>) : RecyclerView.Adapter<C
     override fun onBindViewHolder(holder: CuastomViewHolder, position: Int) {
         val movieItem = movieList[position]
         holder.moveToDetail(movieItem)
-        val imagePath = "https://image.tmdb.org/t/p/original"+movieItem.poster_path
+        val imagePath = "https://image.tmdb.org/t/p/original" + movieItem.poster_path
         movieItem.id
         holder.title.text = movieItem.title
         holder.originalTitle.text = movieItem.original_title
@@ -32,16 +34,17 @@ class MoviesAdapter(private val movieList: List<Movie>) : RecyclerView.Adapter<C
         Picasso.get().load(imagePath).into(holder.image)
     }
 }
-class CuastomViewHolder(val view: View) : RecyclerView.ViewHolder(view){
+
+class CuastomViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     val title: TextView = view.title_movie
     val originalTitle: TextView = view.original_title_movie
     val rate: TextView = view.rate
-   val image: ImageView = view.imageMovie
+    val image: ImageView = view.imageMovie
 
-    fun moveToDetail(movieItem: Movie ) {
+    fun moveToDetail(movieItem: Movie) {
         view.setOnClickListener {
             val intent = Intent(view.context, MovieDetailActivity::class.java)
-            intent.putExtra("id",movieItem.id)
+            intent.putExtra("id", movieItem.id)
             view.context.startActivity(intent)
         }
     }

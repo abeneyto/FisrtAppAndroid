@@ -16,8 +16,8 @@ interface APIService {
     @GET("movie/{movie_id}")
     suspend fun getMovieDetail(@Path("movie_id")id:String?, @Query("api_key")key:String): Response<MovieDetail>
 
-    @GET("search/movie")
-    suspend fun getMovieCredits(@QueryMap map:Map<Int, String>): Response<Result>
+    @GET("movie/{movie_id}/credits")
+    suspend fun getMovieCredits(@Path("movie_id")id:String?, @Query("api_key")key:String): Response<MovieCrew>
 }
 object RetrofitFactory {
     const val BASE_URL = "https://api.themoviedb.org/3/"

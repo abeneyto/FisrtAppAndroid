@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/favoritosFragment"
-        android:name="com.example.hello.FavoritosFragment"
+        android:name="com.example.hello.FavoritesFragment"
         android:label="Favoritos"
         tools:layout="@layout/favoritos_fragment" />
     <fragment
         android:id="@+id/busquedaFragment"
-        android:name="com.example.hello.BusquedaFragment"
+        android:name="com.example.hello.SearchFragment"
         android:label="Busqueda"
         tools:layout="@layout/busqueda_fragment" />
     <fragment
         android:id="@+id/perfilFragment"
-        android:name="com.example.hello.PerfilFragment"
+        android:name="com.example.hello.ProfileFragment"
         android:label="Perfil"
         tools:layout="@layout/perfil_fragment" />
 </navigation>

@@ -27,20 +27,18 @@ import retrofit2.HttpException
 import android.view.View.OnFocusChangeListener
 
 
-
 /**
  * A simple [Fragment] subclass.
  */
-class BusquedaFragment : Fragment() {
-private lateinit var recycler: RecyclerView
-private  lateinit var textToSearch : EditText
+class SearchFragment : Fragment() {
+    private lateinit var recycler: RecyclerView
+    private lateinit var textToSearch: EditText
     override fun onCreateView(
 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-
     ): View? {
-        var view =inflater.inflate(R.layout.busqueda_fragment, container, false)
+        var view = inflater.inflate(R.layout.busqueda_fragment, container, false)
         recycler = view.movies_reciclerview
         textToSearch = view.searchText
         recycler.layoutManager = LinearLayoutManager(this.context)
@@ -59,7 +57,8 @@ private  lateinit var textToSearch : EditText
         })
         return view
     }
-    private fun searchMovies(searchText: String){
+
+    private fun searchMovies(searchText: String) {
         val service = RetrofitFactory.makeRetrofitService()
         CoroutineScope(Dispatchers.IO).launch {
             val map = mapOf("api_key" to apiKey, "query" to searchText)
@@ -69,20 +68,14 @@ private  lateinit var textToSearch : EditText
                     if (response.isSuccessful) {
                         recycler.adapter = MoviesAdapter(response.body()!!.results)
                     } else {
-                        Toast.makeText(activity,"Error: ${response.code()}", Toast.LENGTH_LONG)
+                        Toast.makeText(activity, "Error: ${response.code()}", Toast.LENGTH_LONG)
                     }
                 } catch (e: HttpException) {
-                    Toast.makeText(activity,"Exception ${e.message}", Toast.LENGTH_LONG)
+                    Toast.makeText(activity, "Exception ${e.message}", Toast.LENGTH_LONG)
                 } catch (e: Throwable) {
-                    Toast.makeText(activity,"Ooops: Something else went wrong", Toast.LENGTH_LONG)
+                    Toast.makeText(activity, "Ooops: Something else went wrong", Toast.LENGTH_LONG)
                 }
             }
         }
-    }
-    fun Context.hideKeyboard(view: View) {
-        val inputMethodManager =
-            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-
     }
 }

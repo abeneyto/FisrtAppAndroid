@@ -12,9 +12,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 val apiKey = "b77d905a8b9dd24049c8817705063b08"
 
 class MainActivity : AppCompatActivity() {
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,6 +20,5 @@ class MainActivity : AppCompatActivity() {
         // para los titulos arriba
         setupActionBarWithNavController(navController1, appBarConfiguration)
         bottomNavigationView2.setupWithNavController(navController1)
-}
-
+    }
 }
