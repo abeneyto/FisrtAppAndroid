@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/image_movie"
+        android:id="@+id/imageMovie"
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_marginStart="8dp"
@@ -20,20 +20,29 @@
 
     <TextView
         android:id="@+id/title_movie"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
         android:text="Titulo"
+        android:textColor="#E6000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/original_title_movie"
-        app:layout_constraintStart_toEndOf="@+id/image_movie"
+        app:layout_constraintEnd_toStartOf="@+id/barrier3"
+        app:layout_constraintStart_toEndOf="@+id/imageMovie"
         app:layout_constraintStart_toStartOf="@+id/original_title_movie"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/original_title_movie"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
         android:text="Titulo original"
+        android:textColor="#CC000000"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/date_title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/date_title"
         app:layout_constraintTop_toBottomOf="@+id/title_movie" />
 
@@ -42,9 +51,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:text="Fecha de lanzamiento:"
+        android:text="Date:"
+        android:textColor="#CC000000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/image_movie"
+        app:layout_constraintStart_toEndOf="@+id/imageMovie"
         app:layout_constraintTop_toBottomOf="@+id/original_title_movie" />
 
     <TextView
@@ -53,6 +63,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="5"
+        android:textColor="#E6000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title_movie" />
 
@@ -62,6 +75,16 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="10/10/99"
+        android:textColor="#E6000000"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/date_title"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="rate"
+        tools:layout_editor_absoluteX="411dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

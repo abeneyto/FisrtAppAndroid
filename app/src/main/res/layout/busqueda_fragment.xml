@@ -4,14 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MovieListActivity">
+    tools:context=".SearchFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movies_reciclerview"
-        android:layout_width="409dp"
-        android:layout_height="601dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchText" />
+
+    <EditText
+        android:id="@+id/searchText"
+        android:layout_width="332dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Insert movie"
+        android:inputType="textPersonName"
+        android:textColor="#969494"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
