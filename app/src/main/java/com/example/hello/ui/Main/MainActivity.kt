@@ -1,4 +1,4 @@
-package com.example.hello
+package com.example.hello.ui.Main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.hello.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 

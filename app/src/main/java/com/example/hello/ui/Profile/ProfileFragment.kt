@@ -1,11 +1,11 @@
-package com.example.hello
+package com.example.hello.ui.Profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.perfil_fragment.*
+import com.example.hello.R
 
 /**
  * A simple [Fragment] subclass.
@@ -20,6 +20,4 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         return view
     }
-
-
 }
