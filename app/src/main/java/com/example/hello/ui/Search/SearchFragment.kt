@@ -27,7 +27,7 @@ class SearchFragment : Fragment(), MovieSearchView {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.busqueda_fragment, container, false)
-        val presenter = SearchPresenter(view)
+        val presenter = SearchPresenter(this)
         adapter = MoviesAdapter()
         recycler = view.movies_reciclerview
         recycler.adapter = adapter
