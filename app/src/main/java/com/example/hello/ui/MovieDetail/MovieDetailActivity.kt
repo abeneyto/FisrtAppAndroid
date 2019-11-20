@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.hello.R
+import com.example.hello.data.local.DatabaseFactory
+import com.example.hello.data.local.RoomDatabaseRepository
+import com.example.hello.data.remote.Movie
 import com.example.hello.data.remote.MovieCrew
 import com.example.hello.data.remote.MovieDetail
 import com.example.hello.data.remote.MovieDirector
@@ -13,18 +16,21 @@ import kotlinx.android.synthetic.main.activity_movie_detail.*
 class MovieDetailActivity : AppCompatActivity(), MovieDetailView {
 
 
+    private lateinit var presenter: MovieDetailPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
-        val presenter = MovieDetailPresenter(this)
+        presenter = MovieDetailPresenter(this, RoomDatabaseRepository(DatabaseFactory.get(this)))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
         val id: Int = intent.getIntExtra("id", 1)
         presenter.dataDetailMovies(id)
+        //presenter.init(id)
     }
 
     override fun showData(
         body: MovieDetail,
         bodyCast: MovieCrew
     ) {
+        val movie = Movie(body!!.id, body!!.vote_average, body!!.title, body!!.title, body!!.poster_path)
         movieDescription.text = body!!.overview
         val genre = body!!.genres
         movieTitle.text = body!!.title
@@ -38,10 +44,10 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailView {
         val cast = bodyCast.cast
         val strCast = cast.take(3).joinToString(", ") { it.name }
         movieCast.text = strCast
-
         val director: MovieDirector = crew.first { d -> d.job.equals("Director") }
         movieDirector.text = director.name
         Picasso.get().load(imagePath).into(movieImage)
+
     }
 
     override fun showError(errorText: String) {
@@ -50,5 +56,18 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailView {
             errorText,
             Toast.LENGTH_LONG
         )
+    }
+
+    override fun favBtnSelected(movie: Movie) {
+        btnFavorites.setImageResource(R.drawable.image_full_star)
+        btnFavorites.setOnClickListener {
+            presenter.deleteFromFavorites(movie)
+        }
+    }
+    override fun favBtnNonSelected(movie: Movie) {
+        btnFavorites.setImageResource(R.drawable.image_empty_star)
+        btnFavorites.setOnClickListener {
+            presenter.addToFavorite(movie)
+        }
     }
 }

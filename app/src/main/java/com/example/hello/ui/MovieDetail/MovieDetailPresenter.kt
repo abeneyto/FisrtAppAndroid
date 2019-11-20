@@ -1,6 +1,7 @@
 package com.example.hello.ui.MovieDetail
 
-import android.widget.Toast
+import com.example.hello.data.local.LocalRepository
+import com.example.hello.data.remote.Movie
 import com.example.hello.data.remote.MovieCrew
 import com.example.hello.data.remote.MovieDetail
 import com.example.hello.data.remote.RetrofitFactory
@@ -12,7 +13,9 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 
-class MovieDetailPresenter(val view: MovieDetailView) {
+class MovieDetailPresenter(val view: MovieDetailView, val localRepo: LocalRepository) {
+    private lateinit var favorites: List<Movie>
+
     fun dataDetailMovies(id: Int) {
         val service = RetrofitFactory.makeRetrofitService()
         CoroutineScope(Dispatchers.IO).launch {
@@ -24,13 +27,26 @@ class MovieDetailPresenter(val view: MovieDetailView) {
                 id.toString(),
                 apiKey
             )
+            favorites = localRepo.isFavorite(id)
             withContext(Dispatchers.Main) {
                 try {
                     if (responseMovie.isSuccessful && responseCast.isSuccessful) {
-                        val bodyMovie = responseMovie.body()!!
+                        val body = responseMovie.body()!!
                         val bodyCast = responseCast.body()!!
-                        view.showData(bodyMovie, bodyCast)
+                        val movie = Movie(
+                            body!!.id,
+                            body!!.vote_average,
+                            body!!.title,
+                            body!!.title,
+                            body!!.poster_path
+                        )
+                        view.showData(body, bodyCast)
+                        if (favorites.isEmpty()) {
+                            view.favBtnNonSelected(movie)
 
+                        } else {
+                            view.favBtnSelected(movie)
+                        }
                     } else {
                         view.showError("Error: ${responseMovie.code()}")
 
@@ -45,13 +61,38 @@ class MovieDetailPresenter(val view: MovieDetailView) {
             }
         }
     }
+
+    fun addToFavorite(
+        movie: Movie
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            localRepo.insertFavMovie(movie)
+            withContext(Dispatchers.Main) {
+                view.favBtnSelected(movie)
+            }
+        }
+    }
+
+    fun deleteFromFavorites(movie: Movie) {
+        CoroutineScope(Dispatchers.IO).launch {
+            localRepo.deleteFavMovie(movie.id)
+            withContext(Dispatchers.Main) {
+                view.favBtnNonSelected(movie)
+            }
+        }
+    }
 }
+
 
 interface MovieDetailView {
     fun showData(
         body: MovieDetail,
         bodyCast: MovieCrew
     )
+
+    fun favBtnSelected(movie: Movie)
+
+    fun favBtnNonSelected(movie: Movie)
 
     fun showError(errorText: String)
 }

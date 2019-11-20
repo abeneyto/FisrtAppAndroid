@@ -13,7 +13,7 @@ import com.example.hello.ui.MovieDetail.MovieDetailActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-
+//  le pasa una funcion con la que luego trabaja que esun listener
 class MoviesAdapter() :
     RecyclerView.Adapter<CustomViewHolder>() {
     var movieList = listOf<Movie>()
