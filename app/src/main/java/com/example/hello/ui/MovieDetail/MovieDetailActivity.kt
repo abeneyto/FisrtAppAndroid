@@ -7,9 +7,7 @@ import com.example.hello.R
 import com.example.hello.data.local.DatabaseFactory
 import com.example.hello.data.local.Favorite
 import com.example.hello.data.local.RoomDatabaseRepository
-import com.example.hello.data.remote.MovieCrew
-import com.example.hello.data.remote.MovieDetail
-import com.example.hello.data.remote.MovieDirector
+import com.example.hello.data.remote.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
@@ -18,7 +16,11 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailView {
 
     private lateinit var presenter: MovieDetailPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
-        presenter = MovieDetailPresenter(this, RoomDatabaseRepository(DatabaseFactory.get(this)))
+        presenter = MovieDetailPresenter(
+            this,
+            RoomDatabaseRepository(DatabaseFactory.get(this)),
+            RetrofitRemoteRepository(RetrofitFactory.makeRetrofitService())
+        )
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
         val id: Int = intent.getIntExtra("id", 1)
@@ -62,6 +64,7 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailView {
             presenter.deleteFromFavorites(favorite)
         }
     }
+
     override fun favBtnNonSelected(favorite: Favorite) {
         btnFavorites.setImageResource(R.drawable.image_empty_star)
         btnFavorites.setOnClickListener {

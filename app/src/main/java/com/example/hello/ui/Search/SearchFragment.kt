@@ -13,7 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.busqueda_fragment.view.*
 import com.example.hello.R
+import com.example.hello.data.local.DatabaseFactory
+import com.example.hello.data.local.RoomDatabaseRepository
 import com.example.hello.data.remote.Movie
+import com.example.hello.data.remote.RetrofitFactory
+import com.example.hello.data.remote.RetrofitRemoteRepository
 
 
 class SearchFragment : Fragment(), MovieSearchView {
@@ -26,8 +30,9 @@ class SearchFragment : Fragment(), MovieSearchView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.busqueda_fragment, container, false)
-        val presenter = SearchPresenter(this)
+        val view = inflater.inflate(R.layout.busqueda_fragment, container, false)
+        val retrofitRepo = RetrofitRemoteRepository(RetrofitFactory.makeRetrofitService())
+        val presenter = SearchPresenter(this,retrofitRepo)
         adapter = MoviesAdapter()
         recycler = view.movies_reciclerview
         recycler.adapter = adapter

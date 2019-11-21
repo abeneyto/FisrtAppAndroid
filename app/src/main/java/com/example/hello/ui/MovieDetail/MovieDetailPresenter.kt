@@ -4,6 +4,7 @@ import com.example.hello.data.local.Favorite
 import com.example.hello.data.local.LocalRepository
 import com.example.hello.data.remote.MovieCrew
 import com.example.hello.data.remote.MovieDetail
+import com.example.hello.data.remote.RemoteRepository
 import com.example.hello.data.remote.RetrofitFactory
 import com.example.hello.ui.Main.apiKey
 import kotlinx.coroutines.CoroutineScope
@@ -13,51 +14,40 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 
-class MovieDetailPresenter(val view: MovieDetailView, val localRepo: LocalRepository) {
+class MovieDetailPresenter(
+    val view: MovieDetailView,
+    val localRepo: LocalRepository,
+    val remoteRepo: RemoteRepository
+) {
     private lateinit var favorites: List<Favorite>
 
     fun dataDetailMovies(id: Int) {
-        val service = RetrofitFactory.makeRetrofitService()
         CoroutineScope(Dispatchers.IO).launch {
-            val responseMovie = service.getMovieDetail(
+            val responseMovie = remoteRepo.getMovieDetail(
                 id.toString(),
                 apiKey
             )
-            val responseCast = service.getMovieCredits(
+            val responseCast = remoteRepo.getMovieCredits(
                 id.toString(),
                 apiKey
             )
             favorites = localRepo.isFavorite(id)
             withContext(Dispatchers.Main) {
-                try {
-                    if (responseMovie.isSuccessful && responseCast.isSuccessful) {
-                        val body = responseMovie.body()!!
-                        val bodyCast = responseCast.body()!!
-                        val favorite = Favorite(
-                            body!!.id,
-                            body!!.vote_average,
-                            body!!.title,
-                            body!!.original_title,
-                            body!!.poster_path
-                        )
-                        view.showData(body, bodyCast)
-                        if (favorites.isEmpty()) {
-                            view.favBtnNonSelected(favorite)
+                val favorite = Favorite(
+                    responseMovie.id,
+                    responseMovie.vote_average,
+                    responseMovie.title,
+                    responseMovie.original_title,
+                    responseMovie.poster_path
+                )
+                view.showData(responseMovie, responseCast)
+                if (favorites.isEmpty()) {
+                    view.favBtnNonSelected(favorite)
 
-                        } else {
-                            view.favBtnSelected(favorite)
-                        }
-                    } else {
-                        view.showError("Error: ${responseMovie.code()}")
-
-                    }
-                } catch (e: HttpException) {
-                    view.showError("Exception ${e.message}")
-
-
-                } catch (e: Throwable) {
-                    view.showError("Ooops: Something else went wrong")
+                } else {
+                    view.favBtnSelected(favorite)
                 }
+
             }
         }
     }
@@ -82,7 +72,6 @@ class MovieDetailPresenter(val view: MovieDetailView, val localRepo: LocalReposi
         }
     }
 }
-
 
 interface MovieDetailView {
     fun showData(

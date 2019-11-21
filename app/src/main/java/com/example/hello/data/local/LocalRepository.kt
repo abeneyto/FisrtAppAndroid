@@ -10,5 +10,4 @@ interface LocalRepository{
     suspend fun isFavorite(id:Int): List<Favorite>
     suspend fun insertFavMovie(favorite: Favorite)
     suspend fun deleteAll()
-
 }
