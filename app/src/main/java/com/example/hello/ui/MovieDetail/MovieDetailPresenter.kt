@@ -1,23 +1,20 @@
 package com.example.hello.ui.MovieDetail
 
-import com.example.hello.data.local.Favorite
+import com.example.hello.Model.Favorite
 import com.example.hello.data.local.LocalRepository
-import com.example.hello.data.remote.MovieCrew
-import com.example.hello.data.remote.MovieDetail
+import com.example.hello.Model.MovieCrew
+import com.example.hello.Model.MovieDetail
 import com.example.hello.data.remote.RemoteRepository
-import com.example.hello.data.remote.RetrofitFactory
 import com.example.hello.ui.Main.apiKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
-
 
 class MovieDetailPresenter(
-    val view: MovieDetailView,
-    val localRepo: LocalRepository,
-    val remoteRepo: RemoteRepository
+    private val view: MovieDetailView,
+    private val localRepo: LocalRepository,
+    private val remoteRepo: RemoteRepository
 ) {
     private lateinit var favorites: List<Favorite>
 

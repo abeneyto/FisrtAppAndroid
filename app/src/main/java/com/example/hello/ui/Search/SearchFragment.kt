@@ -1,5 +1,6 @@
 package com.example.hello.ui.Search
 
+import android.graphics.drawable.ClipDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,16 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.busqueda_fragment.view.*
 import com.example.hello.R
-import com.example.hello.data.local.DatabaseFactory
-import com.example.hello.data.local.RoomDatabaseRepository
-import com.example.hello.data.remote.Movie
+import com.example.hello.Model.Movie
 import com.example.hello.data.remote.RetrofitFactory
 import com.example.hello.data.remote.RetrofitRemoteRepository
-
 
 class SearchFragment : Fragment(), MovieSearchView {
 
@@ -32,12 +31,14 @@ class SearchFragment : Fragment(), MovieSearchView {
     ): View? {
         val view = inflater.inflate(R.layout.busqueda_fragment, container, false)
         val retrofitRepo = RetrofitRemoteRepository(RetrofitFactory.makeRetrofitService())
-        val presenter = SearchPresenter(this,retrofitRepo)
+        val presenter = SearchPresenter(this, retrofitRepo)
         adapter = MoviesAdapter()
         recycler = view.movies_reciclerview
         recycler.adapter = adapter
         textToSearch = view.searchText
         recycler.layoutManager = LinearLayoutManager(this.context)
+        recycler.addItemDecoration(DividerItemDecoration(context, ClipDrawable.HORIZONTAL))
+
 
         textToSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -53,6 +54,7 @@ class SearchFragment : Fragment(), MovieSearchView {
         })
         return view
     }
+
     override fun showMovies(listMovie: List<Movie>) {
         adapter.addMovies(listMovie)
     }

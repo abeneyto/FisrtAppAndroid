@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -12,66 +12,65 @@
 
         <ImageView
             android:id="@+id/image_profile"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            tools:src="@tools:sample/avatars" />
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile"
+            tools:src="@tools:sample/backgrounds/scenic[15]" />
 
         <TextView
-            android:id="@+id/text_name"
-            android:text="Alvaro Beneyto"
-            style="@style/titles" />
+            android:id="@+id/textName"
+            style="@style/titles"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_profile" />
 
         <LinearLayout
-            android:padding="22dp"
+            android:id="@+id/linearLayout"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:padding="22dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textName">
 
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text_date"
-                    android:text="Nacimiento"
-                    style="@style/subtitles" />
-
-                <TextView
-                    android:id="@+id/text_city"
-                    android:text="Ciudad"
-                    style="@style/subtitles" />
+                    style="@style/subtitles"
+                    android:text="Since" />
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/text_date_content"
-                    android:text="16/03/1999"
+                    android:id="@+id/textDateContent"
                     style="@style/subtitlesBlack" />
 
-                <TextView
-                    android:id="@+id/text_city_content"
-                    android:text="Madrid"
-                    style="@style/subtitlesBlack" />
             </LinearLayout>
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/text_history"
-            android:layout_width="match_parent"
-            android:layout_height="374dp"
-            style="@style/largeText"
-            android:text="TextView" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,4 +1,4 @@
-package com.example.hello.data.local
+package com.example.hello.Model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,4 +11,5 @@ data class Favorite(
     val title:String,
     val original_title: String,
     val poster_path: String,
-    val created: Long = System.currentTimeMillis())
+    val created: Long = System.currentTimeMillis()
+)

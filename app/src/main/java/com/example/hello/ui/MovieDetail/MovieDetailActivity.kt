@@ -1,18 +1,20 @@
 package com.example.hello.ui.MovieDetail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hello.R
 import com.example.hello.data.local.DatabaseFactory
-import com.example.hello.data.local.Favorite
+import com.example.hello.Model.Favorite
+import com.example.hello.Model.MovieCrew
+import com.example.hello.Model.MovieDetail
+import com.example.hello.Model.MovieDirector
 import com.example.hello.data.local.RoomDatabaseRepository
 import com.example.hello.data.remote.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 class MovieDetailActivity : AppCompatActivity(), MovieDetailView {
-
 
     private lateinit var presenter: MovieDetailPresenter
     override fun onCreate(savedInstanceState: Bundle?) {

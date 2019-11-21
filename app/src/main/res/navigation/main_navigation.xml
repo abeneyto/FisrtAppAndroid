@@ -8,16 +8,16 @@
     <fragment
         android:id="@+id/favoritosFragment"
         android:name="com.example.hello.ui.Favorites.FavoritesFragment"
-        android:label="Favoritos"
+        android:label="Favorites"
         tools:layout="@layout/favoritos_fragment" />
     <fragment
         android:id="@+id/busquedaFragment"
         android:name="com.example.hello.ui.Search.SearchFragment"
-        android:label="Busqueda"
+        android:label="Search"
         tools:layout="@layout/busqueda_fragment" />
     <fragment
         android:id="@+id/perfilFragment"
         android:name="com.example.hello.ui.Profile.ProfileFragment"
-        android:label="Perfil"
+        android:label="Profile"
         tools:layout="@layout/perfil_fragment" />
 </navigation>

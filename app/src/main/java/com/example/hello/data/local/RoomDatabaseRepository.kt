@@ -1,5 +1,7 @@
 package com.example.hello.data.local
 
+import com.example.hello.Model.Favorite
+
 open class RoomDatabaseRepository(private val database: AppDatabase) : LocalRepository {
     private val daoRepository = database.movieDao()
 
@@ -12,6 +14,7 @@ open class RoomDatabaseRepository(private val database: AppDatabase) : LocalRepo
         favorites = daoRepository.isFavorite(id)
         return favorites
     }
+
     override suspend fun deleteFavMovie(id: Int) {
         daoRepository.deleteFavorite(id)
     }
@@ -22,13 +25,13 @@ open class RoomDatabaseRepository(private val database: AppDatabase) : LocalRepo
 
     override suspend fun getFavMoviesByCreated(): List<Favorite> {
         var movies: List<Favorite> = listOf()
-            movies = daoRepository.getOrderByCreated()
+        movies = daoRepository.getOrderByCreated()
         return movies
     }
 
     override suspend fun getFavMoviesByTitle(): List<Favorite> {
         var movies: List<Favorite> = listOf()
-            movies = daoRepository.getOrderByTitle()
+        movies = daoRepository.getOrderByTitle()
         return movies
     }
 

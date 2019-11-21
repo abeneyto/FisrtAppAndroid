@@ -9,8 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.hello.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-
-val apiKey = "b77d905a8b9dd24049c8817705063b08"
+const val apiKey = "b77d905a8b9dd24049c8817705063b08"
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,13 +1,13 @@
 package com.example.hello.ui.Favorites
 
-import com.example.hello.data.local.Favorite
+import com.example.hello.Model.Favorite
 import com.example.hello.data.local.LocalRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FavoritesPresenter(val view: FavoritesView, val localRepo: LocalRepository) {
+class FavoritesPresenter(private val view: FavoritesView, private val localRepo: LocalRepository) {
     fun init() {
         CoroutineScope(Dispatchers.IO).launch {
             val movies = localRepo.getFavMovies()
@@ -19,7 +19,7 @@ class FavoritesPresenter(val view: FavoritesView, val localRepo: LocalRepository
 
     fun deleteAll() {
         CoroutineScope(Dispatchers.IO).launch {
-           localRepo.deleteAll()
+            localRepo.deleteAll()
             withContext(Dispatchers.Main) {
                 init()
             }

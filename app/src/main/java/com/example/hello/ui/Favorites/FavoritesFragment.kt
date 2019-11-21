@@ -1,21 +1,19 @@
 package com.example.hello.ui.Favorites
 
+import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hello.R
 import com.example.hello.data.local.DatabaseFactory
-import com.example.hello.data.local.Favorite
+import com.example.hello.Model.Favorite
 import com.example.hello.data.local.RoomDatabaseRepository
 import com.example.hello.ui.Search.MoviesAdapter
 import kotlinx.android.synthetic.main.favoritos_fragment.view.*
 
-
-/**
- * A simple [Fragment] subclass.
- */
 class FavoritesFragment : Fragment(), FavoritesView {
     private lateinit var adapter: MoviesAdapter
     private lateinit var recycler: RecyclerView
@@ -28,8 +26,11 @@ class FavoritesFragment : Fragment(), FavoritesView {
         val view = inflater.inflate(R.layout.favoritos_fragment, container, false)
         adapter = MoviesAdapter()
         recycler = view.recyclerViewFavorites
+
         recycler.layoutManager =
-            LinearLayoutManager(view.context)      // Inflate the layout for this fragment
+            LinearLayoutManager(view.context)
+        recycler.addItemDecoration(DividerItemDecoration(context, HORIZONTAL))
+        // Inflate the layout for this fragment
         recycler.adapter = adapter
         presenter =
             FavoritesPresenter(this, RoomDatabaseRepository(DatabaseFactory.get(activity!!)))
@@ -43,7 +44,7 @@ class FavoritesFragment : Fragment(), FavoritesView {
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem) : Boolean{
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.itemDeleteAll -> presenter.deleteAll()
             R.id.itemOrderByDate -> presenter.orderByDate()
@@ -51,6 +52,7 @@ class FavoritesFragment : Fragment(), FavoritesView {
         }
         return true
     }
+
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_favorites, menu)
     }

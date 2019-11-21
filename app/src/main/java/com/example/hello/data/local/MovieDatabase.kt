@@ -2,7 +2,7 @@ package com.example.hello.data.local
 
 import android.content.Context
 import androidx.room.*
-import com.example.hello.data.remote.Movie
+import com.example.hello.Model.Favorite
 
 @Dao
 interface MovieDao {
@@ -16,10 +16,10 @@ interface MovieDao {
     suspend fun getOrderByCreated(): List<Favorite>
 
     @Query("DELETE from favorite where id = :id")
-    suspend fun deleteFavorite(id:Int)
+    suspend fun deleteFavorite(id: Int)
 
     @Query("SELECT * from favorite where id = :id")
-    suspend fun isFavorite(id:Int): List<Favorite>
+    suspend fun isFavorite(id: Int): List<Favorite>
 
     @Query("DELETE from favorite")
     suspend fun deleteAll()

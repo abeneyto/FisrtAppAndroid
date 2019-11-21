@@ -1,14 +1,12 @@
 package com.example.hello.ui.Search
 
-import com.example.hello.data.remote.Movie
+import com.example.hello.Model.Movie
 import com.example.hello.data.remote.RemoteRepository
-import com.example.hello.data.remote.RetrofitFactory
 import com.example.hello.ui.Main.apiKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 
 class SearchPresenter(private val view: MovieSearchView, private val remoteRepo: RemoteRepository) {
 
