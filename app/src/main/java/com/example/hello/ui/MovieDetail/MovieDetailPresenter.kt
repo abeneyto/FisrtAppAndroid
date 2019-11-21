@@ -1,7 +1,7 @@
 package com.example.hello.ui.MovieDetail
 
+import com.example.hello.data.local.Favorite
 import com.example.hello.data.local.LocalRepository
-import com.example.hello.data.remote.Movie
 import com.example.hello.data.remote.MovieCrew
 import com.example.hello.data.remote.MovieDetail
 import com.example.hello.data.remote.RetrofitFactory
@@ -14,7 +14,7 @@ import retrofit2.HttpException
 
 
 class MovieDetailPresenter(val view: MovieDetailView, val localRepo: LocalRepository) {
-    private lateinit var favorites: List<Movie>
+    private lateinit var favorites: List<Favorite>
 
     fun dataDetailMovies(id: Int) {
         val service = RetrofitFactory.makeRetrofitService()
@@ -33,19 +33,19 @@ class MovieDetailPresenter(val view: MovieDetailView, val localRepo: LocalReposi
                     if (responseMovie.isSuccessful && responseCast.isSuccessful) {
                         val body = responseMovie.body()!!
                         val bodyCast = responseCast.body()!!
-                        val movie = Movie(
+                        val favorite = Favorite(
                             body!!.id,
                             body!!.vote_average,
                             body!!.title,
-                            body!!.title,
+                            body!!.original_title,
                             body!!.poster_path
                         )
                         view.showData(body, bodyCast)
                         if (favorites.isEmpty()) {
-                            view.favBtnNonSelected(movie)
+                            view.favBtnNonSelected(favorite)
 
                         } else {
-                            view.favBtnSelected(movie)
+                            view.favBtnSelected(favorite)
                         }
                     } else {
                         view.showError("Error: ${responseMovie.code()}")
@@ -63,21 +63,21 @@ class MovieDetailPresenter(val view: MovieDetailView, val localRepo: LocalReposi
     }
 
     fun addToFavorite(
-        movie: Movie
+        favorite: Favorite
     ) {
         CoroutineScope(Dispatchers.IO).launch {
-            localRepo.insertFavMovie(movie)
+            localRepo.insertFavMovie(favorite)
             withContext(Dispatchers.Main) {
-                view.favBtnSelected(movie)
+                view.favBtnSelected(favorite)
             }
         }
     }
 
-    fun deleteFromFavorites(movie: Movie) {
+    fun deleteFromFavorites(favorite: Favorite) {
         CoroutineScope(Dispatchers.IO).launch {
-            localRepo.deleteFavMovie(movie.id)
+            localRepo.deleteFavMovie(favorite.id)
             withContext(Dispatchers.Main) {
-                view.favBtnNonSelected(movie)
+                view.favBtnNonSelected(favorite)
             }
         }
     }
@@ -90,9 +90,9 @@ interface MovieDetailView {
         bodyCast: MovieCrew
     )
 
-    fun favBtnSelected(movie: Movie)
+    fun favBtnSelected(favorite: Favorite)
 
-    fun favBtnNonSelected(movie: Movie)
+    fun favBtnNonSelected(favorite: Favorite)
 
     fun showError(errorText: String)
 }

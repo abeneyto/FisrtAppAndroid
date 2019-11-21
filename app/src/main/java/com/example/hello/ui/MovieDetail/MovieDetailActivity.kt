@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.hello.R
 import com.example.hello.data.local.DatabaseFactory
+import com.example.hello.data.local.Favorite
 import com.example.hello.data.local.RoomDatabaseRepository
-import com.example.hello.data.remote.Movie
 import com.example.hello.data.remote.MovieCrew
 import com.example.hello.data.remote.MovieDetail
 import com.example.hello.data.remote.MovieDirector
@@ -23,14 +23,12 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailView {
         setContentView(R.layout.activity_movie_detail)
         val id: Int = intent.getIntExtra("id", 1)
         presenter.dataDetailMovies(id)
-        //presenter.init(id)
     }
 
     override fun showData(
         body: MovieDetail,
         bodyCast: MovieCrew
     ) {
-        val movie = Movie(body!!.id, body!!.vote_average, body!!.title, body!!.title, body!!.poster_path)
         movieDescription.text = body!!.overview
         val genre = body!!.genres
         movieTitle.text = body!!.title
@@ -58,16 +56,16 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailView {
         )
     }
 
-    override fun favBtnSelected(movie: Movie) {
+    override fun favBtnSelected(favorite: Favorite) {
         btnFavorites.setImageResource(R.drawable.image_full_star)
         btnFavorites.setOnClickListener {
-            presenter.deleteFromFavorites(movie)
+            presenter.deleteFromFavorites(favorite)
         }
     }
-    override fun favBtnNonSelected(movie: Movie) {
+    override fun favBtnNonSelected(favorite: Favorite) {
         btnFavorites.setImageResource(R.drawable.image_empty_star)
         btnFavorites.setOnClickListener {
-            presenter.addToFavorite(movie)
+            presenter.addToFavorite(favorite)
         }
     }
 }

@@ -3,10 +3,12 @@ package com.example.hello.data.local
 import com.example.hello.data.remote.Movie
 
 interface LocalRepository{
-    suspend fun getFavMovies(): List<Movie>
-    suspend fun getFavMoviesByTitle(): List<Movie>
-    suspend fun getFavMoviesByVotes(): List<Movie>
+    suspend fun getFavMovies(): List<Favorite>
+    suspend fun getFavMoviesByTitle(): List<Favorite>
+    suspend fun getFavMoviesByCreated(): List<Favorite>
     suspend fun deleteFavMovie(id:Int)
-    suspend fun isFavorite(id:Int): List<Movie>
-    suspend fun insertFavMovie(movie: Movie)
+    suspend fun isFavorite(id:Int): List<Favorite>
+    suspend fun insertFavMovie(favorite: Favorite)
+    suspend fun deleteAll()
+
 }

@@ -6,9 +6,15 @@
         android:id="@+id/itemOrderBy"
         android:title="Order by">
         <menu>
-            <item android:title="Item" />
-            <item android:title="Item" />
+            <item
+                android:id="@+id/itemOrderByName"
+                android:title="By name" />
+            <item
+                android:id="@+id/itemOrderByDate"
+                android:title="By date" />
         </menu>
     </item>
-    <item android:title="Item" />
+    <item
+        android:id="@+id/itemDeleteAll"
+        android:title="Detele all" />
 </menu>

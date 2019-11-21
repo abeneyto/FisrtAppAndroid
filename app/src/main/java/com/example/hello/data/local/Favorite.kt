@@ -10,4 +10,5 @@ data class Favorite(
     val vote_average:Double,
     val title:String,
     val original_title: String,
-    val poster_path: String)
+    val poster_path: String,
+    val created: Long = System.currentTimeMillis())

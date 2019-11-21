@@ -6,27 +6,30 @@ import com.example.hello.data.remote.Movie
 
 @Dao
 interface MovieDao {
-    @Query("SELECT * FROM movie")
-    suspend fun getMovies(): List<Movie>
+    @Query("SELECT * FROM favorite")
+    suspend fun getMovies(): List<Favorite>
 
-    @Query("SELECT * FROM movie ORDER BY title")
-    suspend fun getOrderByTitle(): List<Movie>
+    @Query("SELECT * FROM favorite ORDER BY title")
+    suspend fun getOrderByTitle(): List<Favorite>
 
-    @Query("SELECT * FROM movie ORDER BY vote_average")
-    suspend fun getOrderByOverage(): List<Movie>
+    @Query("SELECT * FROM favorite ORDER BY created")
+    suspend fun getOrderByCreated(): List<Favorite>
 
-    @Query("DELETE from movie where id = :id")
-    suspend fun deleteFeavorite(id:Int)
+    @Query("DELETE from favorite where id = :id")
+    suspend fun deleteFavorite(id:Int)
 
-    @Query("SELECT * from movie where id = :id")
-    suspend fun isFavorite(id:Int): List<Movie>
+    @Query("SELECT * from favorite where id = :id")
+    suspend fun isFavorite(id:Int): List<Favorite>
+
+    @Query("DELETE from favorite")
+    suspend fun deleteAll()
 
     @Insert
-    suspend fun insertMovie(movie: Movie)
+    suspend fun insertMovie(favorite: Favorite)
 
 }
 
-@Database(entities = arrayOf(Movie::class), version = 3)
+@Database(entities = arrayOf(Favorite::class), version = 5)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
 }

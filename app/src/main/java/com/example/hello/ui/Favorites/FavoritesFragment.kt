@@ -1,17 +1,17 @@
 package com.example.hello.ui.Favorites
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hello.R
 import com.example.hello.data.local.DatabaseFactory
+import com.example.hello.data.local.Favorite
 import com.example.hello.data.local.RoomDatabaseRepository
-import com.example.hello.data.remote.Movie
 import com.example.hello.ui.Search.MoviesAdapter
 import kotlinx.android.synthetic.main.favoritos_fragment.view.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -42,14 +42,25 @@ class FavoritesFragment : Fragment(), FavoritesView {
         setHasOptionsMenu(true)
     }
 
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean{
+        when (item.itemId) {
+            R.id.itemDeleteAll -> presenter.deleteAll()
+            R.id.itemOrderByDate -> presenter.orderByDate()
+            R.id.itemOrderByName -> presenter.orderByTitle()
+        }
+        return true
+    }
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_favorites, menu)
     }
 
-    override fun showMovies(listMovie: List<Movie>) {
+    override fun showMovies(listMovie: List<Favorite>) {
         adapter.addMovies(listMovie)
-        if (listMovie.isEmpty()) {
-            Log.e("Respuesta", "ta vacio")
-        }
+    }
+
+    override fun onResume() {
+        presenter.init()
+        super.onResume()
     }
 }

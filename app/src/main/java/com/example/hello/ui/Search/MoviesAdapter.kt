@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.hello.R
+import com.example.hello.data.local.Favorite
 import com.example.hello.data.remote.Movie
 import com.example.hello.ui.MovieDetail.MovieDetailActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-//  le pasa una funcion con la que luego trabaja que esun listener
 class MoviesAdapter() :
     RecyclerView.Adapter<CustomViewHolder>() {
-    var movieList = listOf<Movie>()
+    private var movieList = listOf<Any>()
     override fun getItemCount() = movieList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -27,15 +27,24 @@ class MoviesAdapter() :
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val movieItem = movieList[position]
         holder.moveToDetail(movieItem)
-        val imagePath = "https://image.tmdb.org/t/p/original" + movieItem.poster_path
-        movieItem.id
-        holder.title.text = movieItem.title
-        holder.originalTitle.text = movieItem.original_title
-        holder.rate.text = movieItem.vote_average.toString()
-        Picasso.get().load(imagePath).into(holder.image)
+        if (movieItem is Movie){
+            val imagePath = "https://image.tmdb.org/t/p/original" + movieItem.poster_path
+            movieItem.id
+            holder.title.text = movieItem.title
+            holder.originalTitle.text = movieItem.original_title
+            holder.rate.text = movieItem.vote_average.toString()
+            Picasso.get().load(imagePath).into(holder.image)
+        } else if (movieItem is Favorite){
+            val imagePath = "https://image.tmdb.org/t/p/original" + movieItem.poster_path
+            movieItem.id
+            holder.title.text = movieItem.title
+            holder.originalTitle.text = movieItem.original_title
+            holder.rate.text = movieItem.vote_average.toString()
+            Picasso.get().load(imagePath).into(holder.image)
+        }
     }
 
-    fun addMovies(listMovies: List<Movie>){
+    fun addMovies(listMovies: List<Any>) {
         movieList = listMovies
         notifyDataSetChanged()
     }
@@ -47,10 +56,13 @@ class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     val rate: TextView = view.rate
     val image: ImageView = view.imageMovie
 
-    fun moveToDetail(movieItem: Movie) {
+    fun moveToDetail(movieItem: Any) {
         view.setOnClickListener {
             val intent = Intent(view.context, MovieDetailActivity::class.java)
-            intent.putExtra("id", movieItem.id)
+            when (movieItem){
+                is Movie ->  intent.putExtra("id", movieItem.id)
+                is Favorite ->  intent.putExtra("id", movieItem.id)
+            }
             view.context.startActivity(intent)
         }
     }
