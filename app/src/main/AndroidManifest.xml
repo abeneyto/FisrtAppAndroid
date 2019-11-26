@@ -11,18 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfileFragment"></activity>
-        <activity android:name=".SearchFragment" />
-        <activity android:name=".FavoritesFragment" />
-        <activity android:name=".MovieListActivity" />
-        <activity android:name=".MovieDetailActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.Profile.ProfileFragment" />
+        <activity android:name=".ui.Search.SearchFragment" />
+        <activity android:name=".ui.Favorites.FavoritesFragment" />
+        <activity android:name=".ui.MovieDetail.MovieDetailActivity" />
+        <activity android:name=".ui.Main.MainActivity">
+
         </activity>
     </application>
 

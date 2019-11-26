@@ -1,5 +1,8 @@
 package com.example.hello.data.remote
 
+import com.example.hello.Model.MovieCrew
+import com.example.hello.Model.MovieDetail
+import com.example.hello.Model.Result
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

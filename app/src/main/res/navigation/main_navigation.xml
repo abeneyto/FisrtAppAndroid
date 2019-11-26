@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/favoritosFragment">
+    app:startDestination="@id/busquedaFragment">
 
     <fragment
         android:id="@+id/favoritosFragment"
-        android:name="com.example.hello.FavoritesFragment"
-        android:label="Favoritos"
+        android:name="com.example.hello.ui.Favorites.FavoritesFragment"
+        android:label="Favorites"
         tools:layout="@layout/favoritos_fragment" />
     <fragment
         android:id="@+id/busquedaFragment"
-        android:name="com.example.hello.SearchFragment"
-        android:label="Busqueda"
+        android:name="com.example.hello.ui.Search.SearchFragment"
+        android:label="Search"
         tools:layout="@layout/busqueda_fragment" />
     <fragment
         android:id="@+id/perfilFragment"
-        android:name="com.example.hello.ProfileFragment"
-        android:label="Perfil"
+        android:name="com.example.hello.ui.Profile.ProfileFragment"
+        android:label="Profile"
         tools:layout="@layout/perfil_fragment" />
 </navigation>
